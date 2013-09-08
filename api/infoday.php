@@ -5,11 +5,13 @@ include("mheader.php");
 $date = isset($_REQUEST['date']) && !(empty($_REQUEST['date'])) ? $_REQUEST['date'] : '';
 
 $datetime = new DateTime();
-$start = $datetime->createFromFormat('Y-m-d', $date);
-$end = $datetime->createFromFormat('Y-m-d', $date);
 
 $consMng = new Consumption($connection);
 
+$start = $datetime->createFromFormat('Y-m-d', $date);
+$end = $datetime->createFromFormat('Y-m-d', $date);
+$start->add(date_interval_create_from_date_string('-1 DAY'));
+$end->add(date_interval_create_from_date_string('-1 DAY'));
 $hours = $consMng->getConsumptionHourly($end->format('Y-m-d'));
 
 $twohours = array();
@@ -31,29 +33,29 @@ foreach($hours as $key => $item) {
 }
 
 // 7 days before Yesterday (Dayly
-$start->add(date_interval_create_from_date_string('-8 DAYS'));
-$end->add(date_interval_create_from_date_string('-1 DAY'));
+$start->add(date_interval_create_from_date_string('-9 DAYS'));
+$end->add(date_interval_create_from_date_string('-2 DAY'));
 $days = $consMng->getConsumptionDailyTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
 
 // 15 days before yesterday
 $start = $datetime->createFromFormat('Y-m-d', $date);
 $end = $datetime->createFromFormat('Y-m-d', $date);
-$start->add(date_interval_create_from_date_string('-16 DAYS'));
-$end->add(date_interval_create_from_date_string('-1 DAY'));
+$start->add(date_interval_create_from_date_string('-17 DAYS'));
+$end->add(date_interval_create_from_date_string('-2 DAY'));
 $fiftienSums = $consMng->getConsumptionTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
 
 // 15-31 days before yesterday
 $start = $datetime->createFromFormat('Y-m-d', $date);
 $end = $datetime->createFromFormat('Y-m-d', $date);
-$start->add(date_interval_create_from_date_string('-31 DAYS'));
-$end->add(date_interval_create_from_date_string('-16 DAY'));
+$start->add(date_interval_create_from_date_string('-32 DAYS'));
+$end->add(date_interval_create_from_date_string('-17 DAY'));
 $thirtiesSums = $consMng->getConsumptionTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
 
 // 15-31 days before yesterday
 $start = $datetime->createFromFormat('Y-m-d', $date);
 $end = $datetime->createFromFormat('Y-m-d', $date);
-$start->add(date_interval_create_from_date_string('-31 DAYS'));
-$end->add(date_interval_create_from_date_string('-1 DAY'));
+$start->add(date_interval_create_from_date_string('-32 DAYS'));
+$end->add(date_interval_create_from_date_string('-2 DAY'));
 $pastmonth = $consMng->getConsumptionTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
 
 
