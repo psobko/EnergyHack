@@ -15,7 +15,7 @@ $hours = $consMng->getConsumptionHourly($end->format('Y-m-d'));
 // 7 days before Yesterday (Dayly
 $start->add(date_interval_create_from_date_string('-8 DAYS'));
 $end->add(date_interval_create_from_date_string('-1 DAY'));
-$fiftienSums = $consMng->getConsumptionDailyTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
+$days = $consMng->getConsumptionDailyTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
 
 // 15 days before yesterday
 $start = $datetime->createFromFormat('Y-m-d', $date);
