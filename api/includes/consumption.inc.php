@@ -45,7 +45,7 @@ class Consumption extends Base {
 	 * @param DateTime $date: SQL datetime 'Y-m-i' format
 	 * @return Ambigous <boolean, multitype:>
 	 */
-	public function getConsumption($date) {
+	public function getConsumptionHourly($date) {
 		
 		$result = false;
 		
@@ -57,13 +57,75 @@ class Consumption extends Base {
 		
 		$sql = "SELECT * FROM Consumptions
 				WHERE 1 $search";
-		
+// 		echo $sql;print_r($params);
 		$this->stmt = $this->dbh->prepare($sql);
 		if($this->stmt->execute($params)) {
 			$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 			$this->stmt->closeCursor();
 		} 
 		
+		return $result;
+	}
+	
+	public function getConsumptionDailyTotal($start = '', $end = '') {
+	
+		$result = false;
+	
+		$search = "";
+		$params = array();
+	
+		if(!empty($start)) {
+			$search .= " AND DATE(Start) >= ?";
+			$params[] = $start;
+		}
+		if(!empty($end)) {
+			$search .= " AND DATE(Start) < ?";
+			$params[] = $end;
+		}
+	
+		$sql = "SELECT DATE(Start) AS Day, SUM(Cost) AS Cost, SUM(Value) AS Value
+		FROM Consumptions
+		WHERE 1 $search
+		GROUP BY DATE(Start)";
+		echo $sql;print_r($params);
+	
+		$this->stmt = $this->dbh->prepare($sql);
+		if($this->stmt->execute($params)) {
+		$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->stmt->closeCursor();
+		}
+	
+		return $result;
+	}
+	
+	public function getConsumptionDailyAverage($start = '', $end = '') {
+	
+		$result = false;
+	
+		$search = "";
+		$params = array();
+	
+		if(!empty($start)) {
+			$search .= " AND DATE(Start) >= ?";
+			$params[] = $start;
+		}
+		if(!empty($end)) {
+			$search .= " AND DATE(Start) < ?";
+			$params[] = $end;
+		}
+		
+		$sql = "SELECT DATE(Start) AS Day, AVG(Cost) AS Cost, AVG(Value) AS Value 
+				FROM Consumptions
+				WHERE 1 $search
+				GROUP BY DATE(Start)";
+		echo $sql;print_r($params);
+		
+		$this->stmt = $this->dbh->prepare($sql);
+		if($this->stmt->execute($params)) {
+			$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+			$this->stmt->closeCursor();
+		}
+	
 		return $result;
 	}
 }
