@@ -26,12 +26,12 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 //execute post
 $result = curl_exec($ch);
 
-$header = curl_getinfo( $connection );
+$header = curl_getinfo( $ch );
 	$return = array (
-			'httpCode' => curl_getinfo($handle, CURLINFO_HTTP_CODE),
-			'error' => curl_errno( $connection ),
-			'errmsg' => curl_error($connection),
-			'header' => curl_getinfo( $connection ),
+			//'httpCode' => curl_getinfo($handle, CURLINFO_HTTP_CODE),
+			'error' => curl_errno( $ch ),
+			'errmsg' => curl_error($ch),
+			'header' => curl_getinfo( $ch ),
 			'finalURLContent' => $result
 	);
 
