@@ -65,8 +65,8 @@ $data['fiftien'] = $fiftienSums;
 $data['thirtien'] = $thirtiesSums;
 $data['pastmonth'] = $pastmonth;
 
-echo '<pre>';print_r($data);echo '</pre>';
-// print(json_encode($data));
+// echo '<pre>';print_r($data);echo '</pre>';
+print(json_encode($data));
 exit();
 
 ?>
