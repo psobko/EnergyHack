@@ -15,7 +15,8 @@ $end->add(date_interval_create_from_date_string('-1 DAY'));
 $hours = $consMng->getConsumptionHourly($end->format('Y-m-d'));
 
 $twohours = array();
-$cost = 0; $value = 0;
+$cost = 0; $value = 0; 
+$maximums = array('Cost' => 0, 'Value' => 0);
 foreach($hours as $key => $item) {
 	if($key % 2 == 0) {
 		$cost = $item['Cost'];
@@ -29,7 +30,11 @@ foreach($hours as $key => $item) {
 				'Cost' => $cost,
 				'Value' => $value);
 		$cost = 0; $value = 0;
-	}	
+	}
+	if($item['Cost'] > $maximums['Cost'])
+		$maximums['Cost'] = $item['Cost'];
+	if($item['Value'] > $maximums['Value'])
+		$maximums['Value'] = $item['Value'];
 }
 
 // 7 days before Yesterday (Dayly
@@ -61,6 +66,7 @@ $pastmonth = $consMng->getConsumptionTotal($start->format('Y-m-d'), $end->format
 
 $data = array();
 $data['hours'] = $hours;
+$data['hoursmax'] = $maximums;
 $data['twohours'] = $twohours;
 $data['days'] = $days;
 $data['fiftien'] = $fiftienSums;
