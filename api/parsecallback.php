@@ -3,7 +3,7 @@
 include("mheader.php");
 
 
-$cons = new Consumption();
+$cons = new Consumption($connection);
 $consumption = array(
 		'Start' => '2013-01-01 00:00:00',
 		'Duration' => 3600,

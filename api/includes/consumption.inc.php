@@ -1,5 +1,10 @@
 <?php
-class Consumption extends base {
+class Consumption extends Base {
+	
+	
+	public function Consumption($connection) {
+		parent::__construct($connection);
+	}
 	/**
 	 *
 	 * @param Timestamp $start:
