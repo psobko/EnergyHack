@@ -55,15 +55,49 @@ class Consumption extends Base {
 		$search = " AND DATE(Start) = ?";
 		$params[] = $date;
 		
-		$sql = "SELECT * FROM Consumptions
-				WHERE 1 $search";
+		$sql = "SELECT Start, Duration, ROUND(Cost, 2), ROUND(Value, 2) 
+				FROM Consumptions
+				WHERE 1 $search
+				ORDER BY Start DESC";
 // 		echo $sql;print_r($params);
+
 		$this->stmt = $this->dbh->prepare($sql);
 		if($this->stmt->execute($params)) {
 			$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 			$this->stmt->closeCursor();
 		} 
 		
+		return $result;
+	}
+	
+	public function getConsumptionTotal($start = '', $end = '') {
+	
+		$result = false;
+	
+		$search = "";
+		$params = array();
+	
+		if(!empty($start)) {
+			$search .= " AND DATE(Start) >= ?";
+			$params[] = $start;
+		}
+		if(!empty($end)) {
+			$search .= " AND DATE(Start) < ?";
+			$params[] = $end;
+		}
+	
+		$sql = "SELECT ROUND(SUM(Cost), 2) AS Cost, ROUND(SUM(Value), 2) AS Value
+				FROM Consumptions
+				WHERE 1 $search
+				ORDER BY DATE(Start) DESC";
+// 		echo $sql;print_r($params);
+	
+		$this->stmt = $this->dbh->prepare($sql);
+		if($this->stmt->execute($params)) {
+		$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->stmt->closeCursor();
+		}
+	
 		return $result;
 	}
 	
@@ -83,11 +117,12 @@ class Consumption extends Base {
 			$params[] = $end;
 		}
 	
-		$sql = "SELECT DATE(Start) AS Day, SUM(Cost) AS Cost, SUM(Value) AS Value
-		FROM Consumptions
-		WHERE 1 $search
-		GROUP BY DATE(Start)";
-		echo $sql;print_r($params);
+		$sql = "SELECT DATE(Start) AS Day, ROUND(SUM(Cost), 2) AS Cost, ROUND(SUM(Value), 2) AS Value
+				FROM Consumptions
+				WHERE 1 $search
+				GROUP BY DATE(Start)
+				ORDER BY DATE(Start) DESC";
+// 		echo $sql;print_r($params);
 	
 		$this->stmt = $this->dbh->prepare($sql);
 		if($this->stmt->execute($params)) {
@@ -118,7 +153,7 @@ class Consumption extends Base {
 				FROM Consumptions
 				WHERE 1 $search
 				GROUP BY DATE(Start)";
-		echo $sql;print_r($params);
+// 		echo $sql;print_r($params);
 		
 		$this->stmt = $this->dbh->prepare($sql);
 		if($this->stmt->execute($params)) {
