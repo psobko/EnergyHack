@@ -12,6 +12,24 @@ $consMng = new Consumption($connection);
 
 $hours = $consMng->getConsumptionHourly($end->format('Y-m-d'));
 
+$twohours = array();
+$cost = 0; $value = 0;
+foreach($hours as $key => $item) {
+	if($key % 2 == 0) {
+		$cost = $item['Cost'];
+		$value = $item['Value'];
+	} else {
+		$cost += $item['Cost'];
+		$value += $item['Value'];
+		$twohours[] = array(
+				'Start' => $item['Start'],
+				'Duration' => 7200,
+				'Cost' => $cost,
+				'Value' => $value);
+		$cost = 0; $value = 0;
+	}	
+}
+
 // 7 days before Yesterday (Dayly
 $start->add(date_interval_create_from_date_string('-8 DAYS'));
 $end->add(date_interval_create_from_date_string('-1 DAY'));
@@ -41,13 +59,14 @@ $pastmonth = $consMng->getConsumptionTotal($start->format('Y-m-d'), $end->format
 
 $data = array();
 $data['hours'] = $hours;
+$data['twohours'] = $twohours;
 $data['days'] = $days;
 $data['fiftien'] = $fiftienSums;
 $data['thirtien'] = $thirtiesSums;
 $data['pastmonth'] = $pastmonth;
 
-// echo '<pre>';print_r($data);echo '</pre>';
-print(json_encode($data));
+echo '<pre>';print_r($data);echo '</pre>';
+// print(json_encode($data));
 exit();
 
 ?>
