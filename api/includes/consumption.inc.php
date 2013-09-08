@@ -55,7 +55,7 @@ class Consumption extends Base {
 		$search = " AND DATE(Start) = ?";
 		$params[] = $date;
 		
-		$sql = "SELECT Start, Duration, ROUND(Cost, 2) AS Cost, ROUND(Value, 2) AS Value 
+		$sql = "SELECT Start, Duration, ROUND(Cost, 4) AS Cost, ROUND(Value, 4) AS Value 
 				FROM Consumptions
 				WHERE 1 $search
 				ORDER BY Start DESC";
@@ -86,7 +86,7 @@ class Consumption extends Base {
 			$params[] = $end;
 		}
 	
-		$sql = "SELECT ROUND(SUM(Cost), 2) AS Cost, ROUND(SUM(Value), 2) AS Value
+		$sql = "SELECT ROUND(SUM(Cost), 4) AS Cost, ROUND(SUM(Value), 4) AS Value
 				FROM Consumptions
 				WHERE 1 $search
 				ORDER BY DATE(Start) DESC";
@@ -117,7 +117,7 @@ class Consumption extends Base {
 			$params[] = $end;
 		}
 	
-		$sql = "SELECT DATE(Start) AS Day, ROUND(SUM(Cost), 2) AS Cost, ROUND(SUM(Value), 2) AS Value
+		$sql = "SELECT DATE(Start) AS Day, ROUND(SUM(Cost), 4) AS Cost, ROUND(SUM(Value), 4) AS Value
 				FROM Consumptions
 				WHERE 1 $search
 				GROUP BY DATE(Start)
