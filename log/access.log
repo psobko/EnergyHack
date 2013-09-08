@@ -1,6 +1,0 @@
-127.0.0.1 - - [08/Sep/2013:01:51:07 -0400] "GET /api/parsecallback.php HTTP/1.1" 500 275 "-" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
-127.0.0.1 - - [08/Sep/2013:01:51:23 -0400] "OPTIONS * HTTP/1.0" 200 126 "-" "Apache/2.2.22 (Ubuntu) (internal dummy connection)"
-127.0.0.1 - - [08/Sep/2013:01:51:24 -0400] "OPTIONS * HTTP/1.0" 200 126 "-" "Apache/2.2.22 (Ubuntu) (internal dummy connection)"
-127.0.0.1 - - [08/Sep/2013:01:52:03 -0400] "GET /api/parsecallback.php HTTP/1.1" 500 275 "-" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
-127.0.0.1 - - [08/Sep/2013:01:52:50 -0400] "GET /api/parsecallback.php HTTP/1.1" 200 360 "-" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"
-127.0.0.1 - - [08/Sep/2013:01:52:50 -0400] "GET /favicon.ico HTTP/1.1" 404 505 "-" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.22 (KHTML, like Gecko) Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22"

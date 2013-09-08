@@ -1,3 +1,0 @@
-[Sun Sep 08 01:51:07 2013] [error] [client 127.0.0.1] PHP Fatal error:  Call to undefined method Base::_construct() in /home/developer/web/EnergyHack/api/includes/consumption.inc.php on line 6
-[Sun Sep 08 01:52:03 2013] [error] [client 127.0.0.1] PHP Fatal error:  Call to undefined method Base::_construct() in /home/developer/web/EnergyHack/api/includes/consumption.inc.php on line 6
-[Sun Sep 08 01:52:50 2013] [error] [client 127.0.0.1] File does not exist: /home/developer/web/EnergyHack/favicon.ico
