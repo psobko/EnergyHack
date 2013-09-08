@@ -1,4 +1,6 @@
+<?php
 //set POST variables
+
 $url = $_POST['url'];
 unset($_POST['url']);
 
@@ -26,3 +28,4 @@ $result = curl_exec($ch);
 
 //close connection
 curl_close($ch);
+?>
