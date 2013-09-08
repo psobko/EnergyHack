@@ -24,7 +24,7 @@ include("mheader.php");
 
 $cost = (isset($_REQUEST['cost']) && !empty($_REQUEST['cost'])) ? $_REQUEST['cost'] : 0;
 $value = (isset($_REQUEST['value']) && !empty($_REQUEST['value'])) ? $_REQUEST['value'] : 0;
-$start = (isset($_REQUEST['time']) && !empty($_REQUEST['time'])) ? new DateTime($_REQUEST['time']) : new DateTime();
+$start = (isset($_REQUEST['time']) && !empty($_REQUEST['time'])) ? new DateTime(strtotime($_REQUEST['time'])) : new DateTime();
 
 $cons = new Consumption($connection);
 
