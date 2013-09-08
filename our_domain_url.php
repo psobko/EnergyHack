@@ -26,6 +26,19 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 //execute post
 $result = curl_exec($ch);
 
+$header = curl_getinfo( $connection );
+	$return = array (
+			'httpCode' => curl_getinfo($handle, CURLINFO_HTTP_CODE),
+			'error' => curl_errno( $connection ),
+			'errmsg' => curl_error($connection),
+			'header' => curl_getinfo( $connection ),
+			'finalURLContent' => $result
+	);
+
+echo "<pre>";print_r($return); echo "</pre>";
+
 //close connection
 curl_close($ch);
+
+
 ?>

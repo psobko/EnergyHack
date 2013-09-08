@@ -593,7 +593,7 @@ function requestURL($url = "") {
 			'error' => curl_errno( $connection ),
 			'errmsg' => curl_error($connection),
 			'header' => curl_getinfo( $connection ),
-			'finalURLContent' => curl_exec($connection)
+			'finalURLContent' => $finalURLContent
 	);
 	curl_close($connection);
 	return $return;
