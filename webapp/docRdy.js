@@ -44,7 +44,8 @@ function doc_setup() {
 	       voucher_outstanding:{img:"voucheroutstanding.png",title:'Voucher Outstanding',link:'voucher_outstanding'}
 	   },
 	   render:function(template_data){
-	       var html = ich.layerLogin_TMP();
+	   		var model = new (Backbone.Model.extend());
+	       var html = ich.report_TMP({title:"Hello, User"});
 	       $("#main").html(html);
 	   },
 	   setup: function() {
