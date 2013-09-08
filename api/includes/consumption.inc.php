@@ -27,14 +27,15 @@ class Consumption extends Base {
 		$sql = "INSERT INTO Consumptions
 		(" . implode(', ', $fields) . ")
 		VALUES (" . implode(', ', $sqls) . ")";
-				echo $sql;
+// 				echo $sql;
 		$this->stmt = $this->dbh->prepare($sql);
 		if ( $result = $this->stmt->execute($vals) ) {
 			$this->ActivityId = $this->dbh->lastInsertId();
-		} else  {
-// 			error_log(serialize($this->stmt->errorInfo()));
-			echo '<pre>';print_r($this->stmt->errorInfo());echo '</pre>';
-		}
+		} 
+// 		else  {
+// // 			error_log(serialize($this->stmt->errorInfo()));
+// 			echo '<pre>';print_r($this->stmt->errorInfo());echo '</pre>';
+// 		}
 		
 		return $result;
 	}
