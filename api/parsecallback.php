@@ -2,7 +2,9 @@
 
 include("mheader.php");
 
-$json = (isset($_POST['data']) && !empty($_POST['data'])) ? json_decode($_POST['data'], true) : array(); 
+$json = (isset($_REQUEST['data']) && !empty($_REQUEST['data'])) ? json_decode($_REQUEST['data'], true) : array(); 
+error_log(serialize($json));
+echo serialize($json);
 
 $cons = new Consumption($connection);
 

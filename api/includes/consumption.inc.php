@@ -39,4 +39,31 @@ class Consumption extends Base {
 		
 		return $result;
 	}
+	
+	/**
+	 * 
+	 * @param DateTime $date: SQL datetime 'Y-m-i' format
+	 * @return Ambigous <boolean, multitype:>
+	 */
+	public function getConsumption($date) {
+		
+		$result = false;
+		
+		$search = "";
+		$params = array();
+		
+		$search = " AND DATE(Start) = ?";
+		$params[] = $date;
+		
+		$sql = "SELECT * FROM Consumptions
+				WHERE 1 $search";
+		
+		$this->stmt = $this->dbh->prepare($sql);
+		if($this->stmt->execute($params)) {
+			$result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+			$this->stmt->closeCursor();
+		} 
+		
+		return $result;
+	}
 }
