@@ -55,7 +55,7 @@ class Consumption extends Base {
 		$search = " AND DATE(Start) = ?";
 		$params[] = $date;
 		
-		$sql = "SELECT Start, Duration, ROUND(Cost, 2), ROUND(Value, 2) 
+		$sql = "SELECT Start, Duration, ROUND(Cost, 2) AS Cost, ROUND(Value, 2) AS Value 
 				FROM Consumptions
 				WHERE 1 $search
 				ORDER BY Start DESC";
