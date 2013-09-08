@@ -41,6 +41,13 @@ foreach($hours as $key => $item) {
 $start->add(date_interval_create_from_date_string('-9 DAYS'));
 $end->add(date_interval_create_from_date_string('-2 DAY'));
 $days = $consMng->getConsumptionDailyTotal($start->format('Y-m-d'), $end->format('Y-m-d'));
+$maxdays = array('Cost' => 0, 'Value' => 0);
+foreach($days as $item){
+	if($item['Cost'] > $maxdays['Cost'])
+		$maxdays['Cost'] = $item['Cost'];
+	if($item['Value'] > $maxdays['Value'])
+		$maxdays['Value'] = $item['Value'];
+}
 
 // 15 days before yesterday
 $start = $datetime->createFromFormat('Y-m-d', $date);
@@ -69,6 +76,7 @@ $data['hours'] = $hours;
 $data['hoursmax'] = $maximums;
 $data['twohours'] = $twohours;
 $data['days'] = $days;
+$data['daysmax'] = $maxdays;
 $data['fiftien'] = $fiftienSums;
 $data['thirtien'] = $thirtiesSums;
 $data['pastmonth'] = $pastmonth;
